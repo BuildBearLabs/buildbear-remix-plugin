@@ -3,6 +3,8 @@ import "./App.css";
 import axios from "axios";
 import useSWR from "swr";
 import { BuildbearLogo } from "./svg";
+import { BASE_URL } from "./configs";
+
 const { ethers } = require("ethers");
 // import { ethers } from 'ethers';
 
@@ -16,183 +18,7 @@ function App() {
   const [live, setLive] = useState(false);
   const [blockNumber, setBlockNumber] = useState();
   const [showRpc, setShowRpc] = useState(false);
-  // const chains = [
-  //   {
-  //     name: "Ethereum",
-  //     id: "Ethereum",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Ethereum Mainnet",
-  //         value: "1",
-  //         networkRpc: "https://rpc.ankr.com/eth",
-  //       },
-  //       {
-  //         label: "Goerli Testnet",
-  //         value: "5",
-  //         networkRpc: "https://rpc.ankr.com/eth_goerli",
-  //       },
-  //       {
-  //         label: "Sepolia Testnet",
-  //         value: "11155111",
-  //         networkRpc: "https://rpc.sepolia.org/",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Polygon",
-  //     id: "Polygon",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Polygon Mainnet",
-  //         value: "137",
-  //         networkRpc: "https://rpc.ankr.com/polygon",
-  //       },
-  //       {
-  //         label: "Polygon Testnet",
-  //         value: "80001",
-  //         networkRpc: "https://rpc.ankr.com/polygon_mumbai",
-  //       },
-  //     ],
-  //   },
 
-  //   {
-  //     name: "Arbitrum",
-  //     id: "Arbitrum",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Arbitrum Mainnet",
-  //         value: "42161",
-  //         networkRpc: "https://arb1.arbitrum.io/rpc",
-  //       },
-  //       {
-  //         label: "Arbitrum Goerli",
-  //         value: "421613",
-  //         networkRpc:
-  //           "https://endpoints.omniatech.io/v1/arbitrum/goerli/public",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Optimism",
-  //     enabled: true,
-  //     id: "Optimism",
-  //     options: [
-  //       {
-  //         label: "Optimism Mainnet",
-  //         value: "10",
-  //         networkRpc: "https://mainnet.optimism.io",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Fantom",
-  //     id: "Fantom",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Fantom Mainnet",
-  //         value: "250",
-  //         networkRpc: "https://rpc.fantom.network",
-  //       },
-  //       {
-  //         label: "Fantom Testnet",
-  //         value: "4002",
-  //         networkRpc: "https://rpc.ankr.com/fantom_testnet",
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     name: "Avalanche",
-  //     enabled: true,
-  //     id: "Avalanche",
-  //     options: [
-  //       {
-  //         label: "Avalanche Mainnet",
-  //         value: "43114",
-  //         networkRpc: "https://rpc.ankr.com/avalanche",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Binance",
-  //     enabled: true,
-  //     id: "Binance",
-  //     options: [
-  //       {
-  //         label: "Binance Smart Chain",
-  //         value: "56",
-  //         networkRpc: "https://rpc.ankr.com/bsc",
-  //       },
-  //       {
-  //         label: "BSC Testnet",
-  //         value: "97",
-  //         networkRpc:
-  //           "https://little-palpable-seed.bsc-testnet.discover.quiknode.pro/9a49cf2c027187fa38ffe27450ca3e49daa49420",
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     name: "zkEVM polygon",
-  //     id: "zkPolygon",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Polygon zkEVM",
-  //         value: "1101",
-  //         networkRpc: "https://zkevm-rpc.com",
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     name: "Linea",
-  //     id: "linea",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Linea Mainnet",
-  //         value: "59144",
-  //         networkRpc: "https://rpc.linea.build",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Gnosis",
-
-  //     id: "gnosis",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Gnosis",
-  //         value: "100",
-  //         networkRpc: "https://rpc.ankr.com/gnosis",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Omni",
-  //     id: "omni",
-  //     enabled: true,
-  //     options: [
-  //       {
-  //         label: "Omni Testnet",
-  //         value: "165",
-  //         networkRpc: "https://testnet.omni.network",
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     name: "None",
-  //     enabled: true,
-  //     id: "None",
-  //   },
-  // ];
 
   function resetButton() {
     setSelectedChain("");
@@ -201,12 +27,12 @@ function App() {
     setBlockNumber();
     setLoader(false);
     setLive(false);
-    setShowRpc(false)
+    setShowRpc(false);
   }
 
   const handleChainChange = (event) => {
     setSelectedChain(event.target.value);
-    console.log("-----" + event.target.value);
+    // console.log("-----" + event.target.value);
     setSelectedOption("");
   };
 
@@ -215,8 +41,7 @@ function App() {
   };
 
   useEffect(() => {
-    const temp = localStorage.getItem("config-v0.8:.remix.config");
-    console.log("-----", temp);
+    // console.log("-----", temp);
   }, []);
 
   useEffect(() => {
@@ -247,7 +72,7 @@ function App() {
     const config = {
       method: "post",
       // url: `https://backend.dev.buildbear.io/api/createfork`,
-      url: `https://api.dev.buildbear.io/v1/buildbear-sandbox`,
+      url: `https://api.${BASE_URL}/v1/buildbear-sandbox`,
 
       headers: {
         Authorization: `Bearer BB_a55d709e-4f81-973a-9513-6681d36e0970`,
@@ -268,7 +93,7 @@ function App() {
   async function getNodeDetails() {
     const config = {
       method: "get",
-      url: `https://backend.dev.buildbear.io/user/container/${nodeId}`,
+      url: `https://backend.${BASE_URL}/user/container/${nodeId}`,
       headers: {
         Authorization: `Bearer BB_a55d709e-4f81-973a-9513-6681d36e0970`,
         "Content-Type": "application/json",
@@ -318,16 +143,13 @@ function App() {
   async function connectMetaMask(nodeHash, checkMetamaskLock) {
     if (!window.ethereum) {
       console.log("Metamask not found. Please Install it.");
-
       return;
     }
-    debugger;
     const provider = new ethers.providers.JsonRpcProvider({
-      url: `https://rpc.dev.buildbear.io/${nodeHash}`,
+      url: `https://rpc.${BASE_URL}/${nodeHash}`,
       timeout: 5000,
     });
 
-    debugger;
     const { chainId } = await provider.getNetwork();
 
     const formattedName = testnetName(nodeHash);
@@ -339,9 +161,9 @@ function App() {
           {
             chainName: `BuildBear ${formattedName}`,
             chainId: `0x${chainId.toString(16)}`,
-            rpcUrls: [`https://rpc.dev.buildbear.io/${nodeHash}`],
+            rpcUrls: [`https://rpc.{BASE_URL}/${nodeHash}`],
             blockExplorerUrls: [
-              `https://explorer.dev.buildbear.io/${nodeHash}`,
+              `https://explorer.{BASE_URL}/${nodeHash}`,
             ],
             nativeCurrency: {
               name: "BB Ether",
@@ -445,13 +267,6 @@ function App() {
             </div>
           </div>
 
-          {/* <div class="tooltip">
-         ?
-          <span class="tooltiptext">Please wait white testnet is creating</span>
-        </div>
-        <div>
-          Hello
-        </div> */}
           <div>
             <div
               style={{
@@ -520,17 +335,7 @@ function App() {
               </div>
             )}
 
-            <>
-              {selectedOption ? (
-                <>
-                  {/* <div style={{ fontSize: "22px" }}>
-                  <p>Selected Chain Id: {selectedOption}</p>
-                </div> */}
-                </>
-              ) : (
-                ""
-              )}
-            </>
+            <>{selectedOption ? <></> : ""}</>
           </div>
 
           <div style={{}}>
@@ -557,8 +362,7 @@ function App() {
               {loader && <div class="loader"></div>}
             </div>
 
-
-            <div style={{ fontSize: "20px",  }}>
+            <div style={{ fontSize: "20px" }}>
               {nodeId && (
                 <div>
                   <div
@@ -609,12 +413,22 @@ function App() {
                         ) : (
                           <span className=" notlive-node"></span>
                         )}{" "}
-                        <div style={{ fontSize: "14px", paddingRight: "2px" , display: "flex", }} >
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            paddingRight: "2px",
+                            display: "flex",
+                          }}
+                        >
                           {live ? (
                             "Live"
                           ) : (
                             <>
-                              Starting <div style={{ marginLeft: "5px" }} class="loader"></div>
+                              Starting{" "}
+                              <div
+                                style={{ marginLeft: "5px" }}
+                                class="loader"
+                              ></div>
                             </>
                           )}
                         </div>
@@ -628,7 +442,7 @@ function App() {
                             width: "20px",
                             height: "20px",
                             borderRadius: "100%",
-                           
+
                             marginTop: "6px",
                             fontSize: "14px",
                             fontWeight: "400",
@@ -652,7 +466,7 @@ function App() {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "row",
+                  // flexDirection: "row",
                   alignItems: "start",
                   gap: "10px",
                 }}
@@ -662,68 +476,26 @@ function App() {
                     <button
                       onClick={() => {
                         setShowRpc(!showRpc);
-                        // navigator.clipboard.writeText(
-                        //   `rpc.dev.buildbear.io/${nodeId}`
-                        // );
                       }}
                       className="ide-button"
                     >
                       View & Copy RPC
                     </button>
 
-                    {/* <div
-                    style={{
-                      backgroundColor: "#35384c",
-                      fontSize: "14px",
-                      padding: "10px 12px",
-                      // justifyContent: "space-between",
-                      display: "flex",
-                      gap: "16px",
-                      alignItems: "center",
-                      marginRight: "20px",
-                    }}
-                  >
-                    <div>rpc.dev.buildbear.io/{nodeId} </div>{" "}
-                    <button className="" style={{ backgroundColor: "#6a7098" }}>
-                      {}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        viewBox="0 0 438 511.52"
-                        height={30}
-                      >
-                        <path
-                          fill-rule="nonzero"
-                          d="M141.44 0h172.68c4.71 0 8.91 2.27 11.54 5.77L434.11 123.1a14.37 14.37 0 0 1 3.81 9.75l.08 251.18c0 17.62-7.25 33.69-18.9 45.36l-.07.07c-11.67 11.64-27.73 18.87-45.33 18.87h-20.06c-.3 17.24-7.48 32.9-18.88 44.29-11.66 11.66-27.75 18.9-45.42 18.9H64.3c-17.67 0-33.76-7.24-45.41-18.9C7.24 480.98 0 464.9 0 447.22V135.87c0-17.68 7.23-33.78 18.88-45.42C30.52 78.8 46.62 71.57 64.3 71.57h12.84V64.3c0-17.68 7.23-33.78 18.88-45.42C107.66 7.23 123.76 0 141.44 0zm30.53 250.96c-7.97 0-14.43-6.47-14.43-14.44 0-7.96 6.46-14.43 14.43-14.43h171.2c7.97 0 14.44 6.47 14.44 14.43 0 7.97-6.47 14.44-14.44 14.44h-171.2zm0 76.86c-7.97 0-14.43-6.46-14.43-14.43 0-7.96 6.46-14.43 14.43-14.43h136.42c7.97 0 14.43 6.47 14.43 14.43 0 7.97-6.46 14.43-14.43 14.43H171.97zM322.31 44.44v49.03c.96 12.3 5.21 21.9 12.65 28.26 7.8 6.66 19.58 10.41 35.23 10.69l33.39-.04-81.27-87.94zm86.83 116.78-39.17-.06c-22.79-.35-40.77-6.5-53.72-17.57-13.48-11.54-21.1-27.86-22.66-48.03l-.14-2v-64.7H141.44c-9.73 0-18.61 4-25.03 10.41C110 45.69 106 54.57 106 64.3v319.73c0 9.74 4.01 18.61 10.42 25.02 6.42 6.42 15.29 10.42 25.02 10.42H373.7c9.75 0 18.62-3.98 25.01-10.38 6.45-6.44 10.43-15.3 10.43-25.06V161.22zm-84.38 287.11H141.44c-17.68 0-33.77-7.24-45.41-18.88-11.65-11.65-18.89-27.73-18.89-45.42v-283.6H64.3c-9.74 0-18.61 4-25.03 10.41-6.41 6.42-10.41 15.29-10.41 25.03v311.35c0 9.73 4.01 18.59 10.42 25.01 6.43 6.43 15.3 10.43 25.02 10.43h225.04c9.72 0 18.59-4 25.02-10.43 6.17-6.17 10.12-14.61 10.4-23.9z"
-                        />
-                      </svg>
-                    </button>{" "}
-                  </div> */}
-
                     <a
-                      href={`https://explorer.dev.buildbear.io/${nodeId}`}
+                      href={`https://explorer.${BASE_URL}/${nodeId}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <button className="ide-button">View Explorer</button>
                     </a>
                     <a
-                      href={`https://faucet.dev.buildbear.io/${nodeId}`}
+                      href={`https://faucet.${BASE_URL}/${nodeId}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <button className="ide-button">Open Faucet</button>
                     </a>
-                    {/* <a
-                    href={`https://faucet.dev.buildbear.io/${nodeId}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  
-                  > */}
                     <button
                       className="ide-button"
                       onClick={() => {
@@ -732,13 +504,48 @@ function App() {
                     >
                       Add to Metamask
                     </button>
-                    {/* </a> */}
                   </>
                 ) : (
                   ""
                 )}
               </div>
             )}
+            {/* <div class="flex-container">
+              <div class="flex-item-left">
+                <button
+                  onClick={() => {
+                    setShowRpc(!showRpc);
+                  }}
+                  className="ide-button"
+                >
+                  View & Copy RPC
+                </button>
+                <a
+                  href={`https://explorer.dev.buildbear.io/${nodeId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <button className="ide-button">View Explorer</button>
+                </a>
+              </div>
+              <div class="flex-item-right">
+                <a
+                  href={`https://faucet.dev.buildbear.io/${nodeId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <button className="ide-button">Open Faucet</button>
+                </a>
+                <button
+                  className="ide-button"
+                  onClick={() => {
+                    connectMetaMask(nodeId, checkMetamaskLock);
+                  }}
+                >
+                  Add to Metamask
+                </button>
+              </div>
+            </div> */}
             {showRpc && (
               <div
                 style={{
@@ -753,7 +560,7 @@ function App() {
                 }}
               >
                 <div style={{ marginLeft: "14px", fontSize: "14px" }}>
-                  https://rpc.dev.buildbear.io/{nodeId}{" "}
+                  https://rpc.{BASE_URL}/{nodeId}{" "}
                 </div>{" "}
                 <button
                   className=""
@@ -763,7 +570,7 @@ function App() {
                     // backgroundColor: "#595c76",
                     borderRadius: "5px",
                     color: "white",
-                    padding: "4px",
+                    padding: "4px 6px",
                     border: "none",
                     cursor: "pointer",
                   }}
@@ -782,7 +589,7 @@ function App() {
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     viewBox="0 0 438 511.52"
-                    height={28}
+                    height={18}
                   >
                     <path
                       fill-rule="nonzero"
@@ -792,15 +599,6 @@ function App() {
                 </button>{" "}
               </div>
             )}
-
-            {/* <button
-            onClick={() => {
-              getNodeDetails();
-            }}
-            className="ide-button"
-          >
-            Get Details
-          </button> */}
           </div>
         </div>
         <div
