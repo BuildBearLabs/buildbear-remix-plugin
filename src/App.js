@@ -161,9 +161,9 @@ function App() {
           {
             chainName: `BuildBear ${formattedName}`,
             chainId: `0x${chainId.toString(16)}`,
-            rpcUrls: [`https://rpc.{BASE_URL}/${nodeHash}`],
+            rpcUrls: [`https://rpc.${BASE_URL}/${nodeHash}`],
             blockExplorerUrls: [
-              `https://explorer.{BASE_URL}/${nodeHash}`,
+              `https://explorer.${BASE_URL}/${nodeHash}`,
             ],
             nativeCurrency: {
               name: "BB Ether",
