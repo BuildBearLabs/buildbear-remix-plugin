@@ -3,11 +3,11 @@ import "./App.css";
 import axios from "axios";
 import useSWR from "swr";
 import { BuildbearLogo } from "./svg";
-import { BASE_URL } from "./configs";
+import { BASE_URL, BEARER_TOKEN } from "./configs";
 
 const { ethers } = require("ethers");
 // import { ethers } from 'ethers';
-
+const copy = require("copy-to-clipboard");
 function App() {
   const [selectedChain, setSelectedChain] = useState("");
   const [selectedOption, setSelectedOption] = useState();
@@ -18,7 +18,6 @@ function App() {
   const [live, setLive] = useState(false);
   const [blockNumber, setBlockNumber] = useState();
   const [showRpc, setShowRpc] = useState(false);
-
 
   function resetButton() {
     setSelectedChain("");
@@ -71,11 +70,10 @@ function App() {
 
     const config = {
       method: "post",
-      // url: `https://backend.dev.buildbear.io/api/createfork`,
       url: `https://api.${BASE_URL}/v1/buildbear-sandbox`,
 
       headers: {
-        Authorization: `Bearer BB_a55d709e-4f81-973a-9513-6681d36e0970`,
+        Authorization: `Bearer ${BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
       data,
@@ -95,7 +93,7 @@ function App() {
       method: "get",
       url: `https://backend.${BASE_URL}/user/container/${nodeId}`,
       headers: {
-        Authorization: `Bearer BB_a55d709e-4f81-973a-9513-6681d36e0970`,
+        Authorization: `Bearer ${BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     };
@@ -162,9 +160,7 @@ function App() {
             chainName: `BuildBear ${formattedName}`,
             chainId: `0x${chainId.toString(16)}`,
             rpcUrls: [`https://rpc.${BASE_URL}/${nodeHash}`],
-            blockExplorerUrls: [
-              `https://explorer.${BASE_URL}/${nodeHash}`,
-            ],
+            blockExplorerUrls: [`https://explorer.${BASE_URL}/${nodeHash}`],
             nativeCurrency: {
               name: "BB Ether",
               symbol: "BB ETH",
@@ -219,6 +215,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+ 
         <div>
           <div
             className=" "
@@ -574,10 +571,14 @@ function App() {
                     border: "none",
                     cursor: "pointer",
                   }}
+                  clipboard-write
+                  // onClick={() => {
+                  //   navigator.clipboard.writeText(
+                  //     `rpc.dev.buildbear.io/${nodeId}`
+                  //   );
+                  // }}
                   onClick={() => {
-                    // navigator.clipboard.writeText(
-                    //   `rpc.dev.buildbear.io/${nodeId}`
-                    // );
+                    copy(`https://rpc.${BASE_URL}/${nodeId}`);
                   }}
                 >
                   {}
