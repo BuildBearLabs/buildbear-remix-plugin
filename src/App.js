@@ -509,6 +509,7 @@ function App() {
               )}
             </div>
 
+
             {live && (
               <div
                 style={{
@@ -617,9 +618,11 @@ function App() {
                     // backgroundColor: "#595c76",
                     borderRadius: "5px",
                     color: "white",
-                    padding: "4px 6px",
+                    padding: "6px 10px",
                     border: "none",
                     cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center"
                   }}
                   clipboard-write
                   // onClick={() => {
