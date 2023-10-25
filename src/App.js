@@ -327,8 +327,10 @@ function App() {
                 style={{
                   height: "34px",
                   borderRadius: "5px",
-                  backgroundColor: "#35384c",
-                  color: "white",
+                  // backgroundColor:  `#35384c`,
+                  backgroundColor:  `${theme=== "dark" ? '#35384c' :  ''}`,
+
+                  color: `${theme=== "dark" ? 'white' :  'black'}`,
                   paddingLeft: "10px"
 
                 }}
@@ -362,8 +364,8 @@ function App() {
                   style={{
                     height: "34px",
                     borderRadius: "5px",
-                    backgroundColor: "#35384c",
-                    color: "white",
+                    backgroundColor:  `${theme=== "dark" ? '#35384c' :  ''}`,
+                    color: `${theme=== "dark" ? 'white' :  'black'}`,
                     paddingLeft: "10px"
 
                   }}
