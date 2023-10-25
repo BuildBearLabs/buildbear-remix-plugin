@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #222336;
+  /* background-color: #222336; */
   min-height: 95vh;
   display: flex;
   justify-content:space-between;
@@ -22,7 +22,7 @@
   /* align-items: center; */
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
   padding: 16px;
   overflow-x: hidden;
 }

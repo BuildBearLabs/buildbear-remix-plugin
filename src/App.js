@@ -254,10 +254,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h4  style={{
+        {/* <h4  style={{
           
-            color: theme === "light" ? "black" : "red",
-          }} >Hello</h4>
+            color: theme === "light" ? "green" : "red",
+          }} >Hello</h4> */}
         <div>
           <div
             className=" "
@@ -276,9 +276,8 @@ function App() {
               }}
             >
 
-
-              {BuildbearLogoWhite()}
-              {BuildbearLogoBlack()}
+              { theme === "light" ? BuildbearLogoBlack() : BuildbearLogoWhite()}
+          
               <div>BuildBear Sandbox</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -317,7 +316,7 @@ function App() {
                 flexDirection: "column",
                 marginBottom: "10px",
                 gap: "10px",
-                fontSize: "22px",
+                fontSize: "16px",
                 marginTop: "16px",
               }}
             >
@@ -330,6 +329,8 @@ function App() {
                   borderRadius: "5px",
                   backgroundColor: "#35384c",
                   color: "white",
+                  paddingLeft: "10px"
+
                 }}
                 value={selectedChain}
                 onChange={handleChainChange}
@@ -349,8 +350,9 @@ function App() {
                   justifyContent: "center",
                   flexDirection: "column",
                   gap: "10px",
-                  fontSize: "22px",
+                   fontSize: "16px",
                   marginTop: "16px",
+                  
                 }}
               >
                 <label style={{ display: "flex", fontSize: "16px" }}>
@@ -362,6 +364,8 @@ function App() {
                     borderRadius: "5px",
                     backgroundColor: "#35384c",
                     color: "white",
+                    paddingLeft: "10px"
+
                   }}
                   value={selectedOption}
                   onChange={handleOptionChange}
@@ -682,7 +686,7 @@ function App() {
             <a
               href="https://t.me/Web3_dApp_Developers"
               target="  _noref "
-              className="link-doc"
+              // className="link-doc"
             >
               https://t.me/Web3_dApp_Developers
             </a>
