@@ -4,15 +4,15 @@ import { createClient } from "@remixproject/plugin-webview";
 
 import axios from "axios";
 import useSWR from "swr";
-import { BuildbearLogo, BuildbearLogoBlack, BuildbearLogoWhite } from "./svg";
+import { BuildbearLogoBlack, BuildbearLogoWhite } from "./svg";
 import { BASE_URL, BEARER_TOKEN } from "./configs";
 import Cookies from "universal-cookie";
-import { BuildbearClient } from "./BuildbearClient";
-// import { PluginClient } from "@remixproject/plugin";
+// import { BuildbearClient } from "./BuildbearClient";
+import { PluginClient } from "@remixproject/plugin";
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
 
-export const client = new BuildbearClient()
+export const client = new PluginClient()
 createClient(client);
 
 function App() {
