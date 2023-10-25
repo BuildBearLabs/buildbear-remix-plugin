@@ -1,70 +1,57 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![buildbear](./src/BBLogo.svg)
 
-## Available Scripts
+# BuildBear Plugin for Remix
 
-In the project directory, you can run:
+The BuildBear plugin for Remix IDE. It support for deploy and interacting on BuildBear Sandbox (BuildBear Node).
 
-### `npm start`
+# Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+First, clone the repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+git clone https://github.com/BuildBearLabs/buildbear-remix-plugin
+cd buildbear-remix-plugin
+```
 
-### `npm test`
+Install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn install
+```
 
-### `npm run build`
+Run the app:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn start
+``` 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## View Local Changes on Remix Ide
 
-### `npm run eject`
+ You can view the changes you're making locally within Remix Ide by following step :
+ 1. In Remix, click on the Plugin Manager icon on the left-bottom side of the menu
+ 2. Towards the top, click on Connect to a Local Plugin.
+ 3. Fill the Details:
+    - **Plugin Name** - BuildBear SandBox
+    - **Url** - http://localhost:3000
+    - **Connection Type** - iframe
+    - **Location Type** - side panel (Left Side) 
+ 4. Click on **OK**
+ 5. A question mark icon will appear on the left side menu for the local plugin.
+ 6. Once the local plugin has been created, you can test the changes localy
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##  How to use BuildBear Remix Ide Plugin (Sand Box)
+1. Once your Sandbox is live, copy the RPC
+2. Visit the 4th plugin "Deploy and Run Transactions"
+3. Drop down on the Environment
+4. Select "Custom External Http Provider"
+5 .In the input box "External HTTP Provider Endpoint, paste the RPC (copied in Step 1)
+6. Your Remix IDE will be connected to the BuildBear Sandbox you just created.
+<br/>
+If you have any issues, you can reach out to us on team@buildbear.io or https://t.me/Web3_dApp_Developers
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Additional Notes:
+1. If you want to reset your sandbox, you can use the "Reset" button on the top-right corner of this plugin
