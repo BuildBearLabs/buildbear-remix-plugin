@@ -464,6 +464,7 @@ function App() {
                             fontSize: "14px",
                             paddingRight: "2px",
                             display: "flex",
+                            alignItems: "center",
                           }}
                         >
                           {live ? (
@@ -690,6 +691,7 @@ function App() {
             >
               https://t.me/Web3_dApp_Developers
             </a>
+            
           </div>
           <br />
           <div>Additional Notes:</div>
