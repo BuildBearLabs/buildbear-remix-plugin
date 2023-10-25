@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
     - **Location Type** - side panel (Left Side) 
  4. Click on **OK**
  5. A question mark icon will appear on the left side menu for the local plugin.
- 6. Once the local plugin has been created, you can test the changes localy
+ 6. Once the local plugin has been created, you can test the changes locally
 
 
 ##  How to use BuildBear Remix Ide Plugin (Sand Box)
