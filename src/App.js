@@ -299,6 +299,10 @@ function App() {
               </div>
               <button
                 className="ide-button"
+                style={{
+                  backgroundColor: `${theme === "dark" ? 'red' :  '#92a0ab'}`,
+                 color: `${theme === "dark" ? 'white' :  'black'}`, 
+                }}
                 onClick={() => {
                   resetButton();
                 }}
@@ -609,7 +613,7 @@ function App() {
                   marginBottom: "14px",
                 }}
               >
-                <div style={{ marginLeft: "14px", fontSize: "14px" }}>
+                <div style={{ marginLeft: "14px", fontSize: "14px", paddingRight: "10px" }}>
                   https://rpc.{BASE_URL}/{nodeId}{" "}
                 </div>{" "}
                 <button
