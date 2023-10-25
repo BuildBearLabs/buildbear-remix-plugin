@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { createClient } from "@remixproject/plugin-webview";
+
 import axios from "axios";
 import useSWR from "swr";
-import { BuildbearLogo } from "./svg";
+import { BuildbearLogo, BuildbearLogoBlack, BuildbearLogoWhite } from "./svg";
 import { BASE_URL, BEARER_TOKEN } from "./configs";
-
+import Cookies from "universal-cookie";
+import { BuildbearClient } from "./BuildbearClient";
+// import { PluginClient } from "@remixproject/plugin";
 const { ethers } = require("ethers");
-// import { ethers } from 'ethers';
 const copy = require("copy-to-clipboard");
+
+export const client = new BuildbearClient()
+createClient(client);
+
 function App() {
   const [selectedChain, setSelectedChain] = useState("");
   const [selectedOption, setSelectedOption] = useState();
@@ -18,6 +25,38 @@ function App() {
   const [live, setLive] = useState(false);
   const [blockNumber, setBlockNumber] = useState();
   const [showRpc, setShowRpc] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(()=> {
+    let cookies = new Cookies();
+    console.log("cookies", cookies)
+    let installed = cookies.get("plugin-installed");
+    console.log("installed", installed)
+    if (!installed) {
+      cookies.set("plugin-installed", "true");
+      // track("Remix: Plugin Installed", {}, userData);
+    }
+    client.on("theme", "themeChanged", (theme) => {
+      // console.log("----->>"+ JSON.stringify(theme))
+
+      setTheme(theme?.quality ?? "dark");
+    });
+  })
+  useEffect(()=> {
+    console.log("Theming", theme)
+  }, [theme])
+
+
+
+  // useEffect(()=> {
+  //         // console.log("----->>"+ JSON.stringify(client))
+
+  //   client.on("theme", "themeChanged", (theme) => {
+  //     // console.log("----->>"+ JSON.stringify(theme))
+
+  //     setTheme(theme?.quality ?? "dark");
+  //   });
+  // }, [])
 
   function resetButton() {
     setSelectedChain("");
@@ -215,7 +254,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
- 
+        <h4  style={{
+          
+            color: theme === "light" ? "black" : "red",
+          }} >Hello</h4>
         <div>
           <div
             className=" "
@@ -233,7 +275,10 @@ function App() {
                 height: "60px",
               }}
             >
-              {BuildbearLogo()}
+
+
+              {BuildbearLogoWhite()}
+              {BuildbearLogoBlack()}
               <div>BuildBear Sandbox</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -246,10 +291,10 @@ function App() {
                   fontSize: "14px",
                   fontWeight: "400",
                 }}
-                class="tooltip"
+                className="tooltip"
               >
                 i
-                <span class="tooltiptext">
+                <span className="tooltiptext">
                   To reset the configuration and establish a new sandbox.
                 </span>
               </div>
@@ -356,7 +401,7 @@ function App() {
                   Create Testnet
                 </button>
               )}
-              {loader && <div class="loader"></div>}
+              {loader && <div className="loader"></div>}
             </div>
 
             <div style={{ fontSize: "20px" }}>
@@ -424,7 +469,7 @@ function App() {
                               Starting{" "}
                               <div
                                 style={{ marginLeft: "5px" }}
-                                class="loader"
+                                className="loader"
                               ></div>
                             </>
                           )}
@@ -444,10 +489,10 @@ function App() {
                             fontSize: "14px",
                             fontWeight: "400",
                           }}
-                          class="tooltip"
+                          className="tooltip"
                         >
                           i
-                          <span class="tooltiptext">
+                          <span className="tooltiptext">
                             Kindly wait as the sandbox is being created.{" "}
                           </span>
                         </div>

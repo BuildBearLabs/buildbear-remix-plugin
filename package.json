@@ -7,6 +7,7 @@
     "@remix-run/css-bundle": "^2.0.1",
     "@remixproject/plugin": "^0.3.38",
     "@remixproject/plugin-iframe": "^0.3.38",
+    "@remixproject/plugin-webview": "^0.3.38",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "swr": "^2.2.4",
+    "universal-cookie": "^6.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
