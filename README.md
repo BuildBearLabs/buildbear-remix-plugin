@@ -48,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 2. Visit the 4th plugin "Deploy and Run Transactions"
 3. Drop down on the Environment
 4. Select "Custom External Http Provider"
-5 .In the input box "External HTTP Provider Endpoint, paste the RPC (copied in Step 1)
+5. In the input box "External HTTP Provider Endpoint, paste the RPC (copied in Step 1)
 6. Your Remix IDE will be connected to the BuildBear Sandbox you just created.
 <br/>
 If you have any issues, you can reach out to us on team@buildbear.io or https://t.me/Web3_dApp_Developers
