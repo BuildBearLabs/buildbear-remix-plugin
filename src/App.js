@@ -516,7 +516,7 @@ function App() {
             </div>
 
 
-            {!live && (
+            {live && (
               <div
                 style={{
                   display: "flex",
@@ -525,7 +525,7 @@ function App() {
                   gap: "10px",
                 }}
               >
-                {!nodeId ? (
+                {nodeId ? (
                   <>
                     <button
                       onClick={() => {
