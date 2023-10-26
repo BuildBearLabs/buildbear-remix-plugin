@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Connect Plugin Locally inside Remix Ide
 
- You can view the changes you're making locally within Remix Ide by following step :
+ Once the plugin starts running on localhost. You can view the changes you're making locally within Remix Ide by following step :
  1. In Remix, click on the Plugin Manager icon on the left-bottom side of the menu
  2. Towards the top, click on Connect to a Local Plugin.
  3. Fill the Details:
