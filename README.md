@@ -28,7 +28,7 @@ yarn start
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## View Local Changes on Remix Ide
+## Connect Plugin Locally inside Remix Ide
 
  You can view the changes you're making locally within Remix Ide by following step :
  1. In Remix, click on the Plugin Manager icon on the left-bottom side of the menu
