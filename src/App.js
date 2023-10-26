@@ -300,8 +300,8 @@ function App() {
               <button
                 className="ide-button"
                 style={{
-                  backgroundColor: `${theme === "dark" ? 'red' :  '#92a0ab'}`,
-                 color: `${theme === "dark" ? 'white' :  'black'}`, 
+                //   backgroundColor: `${theme === "dark" ? 'red' :  '#92a0ab'}`,
+                //  color: `${theme === "dark" ? 'white' :  'black'}`, 
                 }}
                 onClick={() => {
                   resetButton();
@@ -516,7 +516,7 @@ function App() {
             </div>
 
 
-            {live && (
+            {!live && (
               <div
                 style={{
                   display: "flex",
@@ -525,7 +525,7 @@ function App() {
                   gap: "10px",
                 }}
               >
-                {nodeId ? (
+                {!nodeId ? (
                   <>
                     <button
                       onClick={() => {
@@ -603,7 +603,7 @@ function App() {
             {showRpc && (
               <div
                 style={{
-                  backgroundColor: "#35384c",
+                  // backgroundColor: "#35384c",
                   width: "100%",
                   alignItems: "center",
                   display: "flex",
