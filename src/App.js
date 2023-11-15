@@ -46,18 +46,6 @@ function App() {
     console.log("Theming", theme)
   }, [theme])
 
-
-
-  // useEffect(()=> {
-  //         // console.log("----->>"+ JSON.stringify(client))
-
-  //   client.on("theme", "themeChanged", (theme) => {
-  //     // console.log("----->>"+ JSON.stringify(theme))
-
-  //     setTheme(theme?.quality ?? "dark");
-  //   });
-  // }, [])
-
   function resetButton() {
     setSelectedChain("");
     setSelectedOption();
@@ -69,8 +57,10 @@ function App() {
   }
 
   const handleChainChange = (event) => {
+    console.log("-----SSS" + event.target.value);
+
     setSelectedChain(event.target.value);
-    // console.log("-----" + event.target.value);
+    console.log("-----" + event.target.value);
     setSelectedOption("");
   };
 
@@ -78,9 +68,11 @@ function App() {
     setSelectedOption(event.target.value);
   };
 
-  useEffect(() => {
-    // console.log("-----", temp);
-  }, []);
+  // useEffect(() => {
+  //   // console.log("-----", temp);
+  //   console.log("=============",chains)
+  //   setSelectedChain("Ethereum")
+  // }, []);
 
   useEffect(() => {
     async function getChains() {
@@ -97,6 +89,10 @@ function App() {
         const res = await axios(config);
         console.log(res?.data);
         setChains(res?.data);
+       setSelectedChain(res?.data[0].id)
+
+        // console.log("Chains=========",chains )
+
       } catch (_) {}
     }
     getChains();
