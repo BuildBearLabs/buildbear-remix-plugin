@@ -25,6 +25,7 @@ function App() {
   const [blockNumber, setBlockNumber] = useState();
   const [showRpc, setShowRpc] = useState(false);
   const [theme, setTheme] = useState("dark");
+  const [metamaskLock, setMetamaskLock] = useState(true);
 
   useEffect(() => {
     let cookies = new Cookies();
@@ -37,7 +38,6 @@ function App() {
     }
     client.on("theme", "themeChanged", (theme) => {
       // console.log(JSON.stringify(theme))
-
       setTheme(theme?.quality ?? "dark");
     });
   });
@@ -45,6 +45,7 @@ function App() {
     // console.log("Theming", theme)
   }, [theme]);
 
+//Sand box Reset Button
   function resetButton() {
     setSelectedChain("");
     setSelectedOption();
@@ -57,10 +58,7 @@ function App() {
   }
 
   const handleChainChange = (event) => {
-    // console.log(event.target.value);
-
     setSelectedChain(event.target.value);
-    // console.log(event.target.value);
     setSelectedOption("");
   };
 
@@ -69,6 +67,7 @@ function App() {
   };
 
   useEffect(() => {
+    //Get chain details from the backend
     async function getChains() {
       const config = {
         method: "get",
@@ -89,6 +88,7 @@ function App() {
     getChains();
   }, []);
 
+  //Post container request
   async function createNode() {
     const data = JSON.stringify({
       chainId: selectedOption,
@@ -113,6 +113,7 @@ function App() {
     setLoader(false);
   }
 
+  //Get Node details
   async function getNodeDetails() {
     const config = {
       method: "get",
@@ -132,6 +133,7 @@ function App() {
     } catch (_) {}
   }
 
+  //Checking Node status in every 1 sec
   const containerApi = useSWR(
     (nodeId && !live) ? "/user/container" : null,
     getNodeDetails,
@@ -140,6 +142,7 @@ function App() {
     }
   );
 
+  //Helper function for Sandbox Name
   function testnetName(temp) {
     if (temp?.includes("-")) {
       const words = temp.replaceAll("-", " ").slice(0, -9).split(" ");
@@ -219,7 +222,6 @@ function App() {
       });
   }
 
-  const [metamaskLock, setMetamaskLock] = useState(true);
 
   async function checkMetamaskLock() {
     const { ethereum } = window;
