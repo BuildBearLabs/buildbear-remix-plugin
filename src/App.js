@@ -45,7 +45,7 @@ function App() {
     // console.log("Theming", theme)
   }, [theme]);
 
-//Sand box Reset Button
+  //Sand box Reset Button
   function resetButton() {
     setSelectedChain("");
     setSelectedOption();
@@ -54,7 +54,6 @@ function App() {
     setLoader(false);
     setLive(false);
     setShowRpc(false);
-    
   }
 
   const handleChainChange = (event) => {
@@ -135,7 +134,7 @@ function App() {
 
   //Checking Node status in every 1 sec
   const containerApi = useSWR(
-    (nodeId && !live) ? "/user/container" : null,
+    nodeId && !live ? "/user/container" : null,
     getNodeDetails,
     {
       refreshInterval: 1000,
@@ -222,7 +221,7 @@ function App() {
       });
   }
 
-
+  //check metamask
   async function checkMetamaskLock() {
     const { ethereum } = window;
     const accounts = await ethereum?._metamask?.isUnlocked();
@@ -246,7 +245,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
         <div>
           <div
             className=" "
