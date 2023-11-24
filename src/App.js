@@ -5,14 +5,13 @@ import { createClient } from "@remixproject/plugin-webview";
 import axios from "axios";
 import useSWR from "swr";
 import { BuildbearLogoBlack, BuildbearLogoWhite } from "./svg";
-import { BASE_URL, BEARER_TOKEN } from "./configs";
 import Cookies from "universal-cookie";
 // import { BuildbearClient } from "./BuildbearClient";
 import { PluginClient } from "@remixproject/plugin";
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
 
-export const client = new PluginClient()
+export const client = new PluginClient();
 createClient(client);
 
 function App() {
@@ -27,24 +26,24 @@ function App() {
   const [showRpc, setShowRpc] = useState(false);
   const [theme, setTheme] = useState("dark");
 
-  useEffect(()=> {
+  useEffect(() => {
     let cookies = new Cookies();
-    console.log("cookies", cookies)
+    console.log("cookies", cookies);
     let installed = cookies.get("plugin-installed");
-    console.log("installed", installed)
+    console.log("installed", installed);
     if (!installed) {
       cookies.set("plugin-installed", "true");
       // track("Remix: Plugin Installed", {}, userData);
     }
     client.on("theme", "themeChanged", (theme) => {
-      // console.log("----->>"+ JSON.stringify(theme))
+      // console.log(JSON.stringify(theme))
 
       setTheme(theme?.quality ?? "dark");
     });
-  })
-  useEffect(()=> {
-    console.log("Theming", theme)
-  }, [theme])
+  });
+  useEffect(() => {
+    // console.log("Theming", theme)
+  }, [theme]);
 
   function resetButton() {
     setSelectedChain("");
@@ -54,13 +53,14 @@ function App() {
     setLoader(false);
     setLive(false);
     setShowRpc(false);
+    
   }
 
   const handleChainChange = (event) => {
-    console.log("-----SSS" + event.target.value);
+    // console.log(event.target.value);
 
     setSelectedChain(event.target.value);
-    console.log("-----" + event.target.value);
+    // console.log(event.target.value);
     setSelectedOption("");
   };
 
@@ -68,17 +68,11 @@ function App() {
     setSelectedOption(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // console.log("-----", temp);
-  //   console.log("=============",chains)
-  //   setSelectedChain("Ethereum")
-  // }, []);
-
   useEffect(() => {
     async function getChains() {
       const config = {
         method: "get",
-        url: `https://backend.dev.buildbear.io/chains`,
+        url: `https://backend.${process.env.REACT_APP_BASE_URL}/chains`,
         headers: {
           Authorization: `Bearer BB_a55d709e-4f81-973a-9513-6681d36e0970`,
           "Content-Type": "application/json",
@@ -89,10 +83,7 @@ function App() {
         const res = await axios(config);
         console.log(res?.data);
         setChains(res?.data);
-       setSelectedChain(res?.data[0].id)
-
-        // console.log("Chains=========",chains )
-
+        setSelectedChain(res?.data[0].id);
       } catch (_) {}
     }
     getChains();
@@ -105,10 +96,10 @@ function App() {
 
     const config = {
       method: "post",
-      url: `https://api.${BASE_URL}/v1/buildbear-sandbox`,
+      url: `https://api.${process.env.REACT_APP_BASE_URL}/v1/buildbear-sandbox`,
 
       headers: {
-        Authorization: `Bearer ${BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_SANDBOX_TOKEN}`,
         "Content-Type": "application/json",
       },
       data,
@@ -116,7 +107,6 @@ function App() {
     try {
       const res = await axios(config);
       console.log("post", res);
-      // console.log("post", res?.data);
       setNodeId(res?.data?.sandboxId);
       setBlockNumber(res?.data?.forkingDetails?.blockNumber);
     } catch (_) {}
@@ -126,9 +116,9 @@ function App() {
   async function getNodeDetails() {
     const config = {
       method: "get",
-      url: `https://backend.${BASE_URL}/user/container/${nodeId}`,
+      url: `https://backend.${process.env.REACT_APP_BASE_URL}/user/container/${nodeId}`,
       headers: {
-        Authorization: `Bearer ${BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.REACT_APP_SANDBOX_TOKEN}`,
         "Content-Type": "application/json",
       },
     };
@@ -143,7 +133,7 @@ function App() {
   }
 
   const containerApi = useSWR(
-    nodeId ? "/user/container" : null,
+    (nodeId && !live) ? "/user/container" : null,
     getNodeDetails,
     {
       refreshInterval: 1000,
@@ -179,7 +169,7 @@ function App() {
       return;
     }
     const provider = new ethers.providers.JsonRpcProvider({
-      url: `https://rpc.${BASE_URL}/${nodeHash}`,
+      url: `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeHash}`,
       timeout: 5000,
     });
 
@@ -194,8 +184,12 @@ function App() {
           {
             chainName: `BuildBear ${formattedName}`,
             chainId: `0x${chainId.toString(16)}`,
-            rpcUrls: [`https://rpc.${BASE_URL}/${nodeHash}`],
-            blockExplorerUrls: [`https://explorer.${BASE_URL}/${nodeHash}`],
+            rpcUrls: [
+              `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeHash}`,
+            ],
+            blockExplorerUrls: [
+              `https://explorer.${process.env.REACT_APP_BASE_URL}/${nodeHash}`,
+            ],
             nativeCurrency: {
               name: "BB Ether",
               symbol: "BB ETH",
@@ -250,10 +244,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <h4  style={{
-          
-            color: theme === "light" ? "green" : "red",
-          }} >Hello</h4> */}
+
         <div>
           <div
             className=" "
@@ -271,9 +262,8 @@ function App() {
                 height: "60px",
               }}
             >
+              {theme === "light" ? BuildbearLogoBlack() : BuildbearLogoWhite()}
 
-              { theme === "light" ? BuildbearLogoBlack() : BuildbearLogoWhite()}
-          
               <div>BuildBear Sandbox</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -295,10 +285,12 @@ function App() {
               </div>
               <button
                 className="ide-button"
-                style={{
-                //   backgroundColor: `${theme === "dark" ? 'red' :  '#92a0ab'}`,
-                //  color: `${theme === "dark" ? 'white' :  'black'}`, 
-                }}
+                style={
+                  {
+                    //   backgroundColor: `${theme === "dark" ? 'red' :  '#92a0ab'}`,
+                    //  color: `${theme === "dark" ? 'white' :  'black'}`,
+                  }
+                }
                 onClick={() => {
                   resetButton();
                 }}
@@ -328,11 +320,10 @@ function App() {
                   height: "34px",
                   borderRadius: "5px",
                   // backgroundColor:  `#35384c`,
-                  backgroundColor:  `${theme=== "dark" ? '#35384c' :  ''}`,
+                  backgroundColor: `${theme === "dark" ? "#35384c" : ""}`,
 
-                  color: `${theme=== "dark" ? 'white' :  'black'}`,
-                  paddingLeft: "10px"
-
+                  color: `${theme === "dark" ? "white" : "black"}`,
+                  paddingLeft: "10px",
                 }}
                 value={selectedChain}
                 onChange={handleChainChange}
@@ -352,9 +343,8 @@ function App() {
                   justifyContent: "center",
                   flexDirection: "column",
                   gap: "10px",
-                   fontSize: "16px",
+                  fontSize: "16px",
                   marginTop: "16px",
-                  
                 }}
               >
                 <label style={{ display: "flex", fontSize: "16px" }}>
@@ -364,10 +354,9 @@ function App() {
                   style={{
                     height: "34px",
                     borderRadius: "5px",
-                    backgroundColor:  `${theme=== "dark" ? '#35384c' :  ''}`,
-                    color: `${theme=== "dark" ? 'white' :  'black'}`,
-                    paddingLeft: "10px"
-
+                    backgroundColor: `${theme === "dark" ? "#35384c" : ""}`,
+                    color: `${theme === "dark" ? "white" : "black"}`,
+                    paddingLeft: "10px",
                   }}
                   value={selectedOption}
                   onChange={handleOptionChange}
@@ -511,7 +500,6 @@ function App() {
               )}
             </div>
 
-
             {live && (
               <div
                 style={{
@@ -533,14 +521,14 @@ function App() {
                     </button>
 
                     <a
-                      href={`https://explorer.${BASE_URL}/${nodeId}`}
+                      href={`https://explorer.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <button className="ide-button">View Explorer</button>
                     </a>
                     <a
-                      href={`https://faucet.${BASE_URL}/${nodeId}`}
+                      href={`https://faucet.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -560,42 +548,7 @@ function App() {
                 )}
               </div>
             )}
-            {/* <div class="flex-container">
-              <div class="flex-item-left">
-                <button
-                  onClick={() => {
-                    setShowRpc(!showRpc);
-                  }}
-                  className="ide-button"
-                >
-                  View & Copy RPC
-                </button>
-                <a
-                  href={`https://explorer.dev.buildbear.io/${nodeId}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <button className="ide-button">View Explorer</button>
-                </a>
-              </div>
-              <div class="flex-item-right">
-                <a
-                  href={`https://faucet.dev.buildbear.io/${nodeId}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <button className="ide-button">Open Faucet</button>
-                </a>
-                <button
-                  className="ide-button"
-                  onClick={() => {
-                    connectMetaMask(nodeId, checkMetamaskLock);
-                  }}
-                >
-                  Add to Metamask
-                </button>
-              </div>
-            </div> */}
+
             {showRpc && (
               <div
                 style={{
@@ -609,8 +562,14 @@ function App() {
                   marginBottom: "14px",
                 }}
               >
-                <div style={{ marginLeft: "14px", fontSize: "14px", paddingRight: "10px" }}>
-                  https://rpc.{BASE_URL}/{nodeId}{" "}
+                <div
+                  style={{
+                    marginLeft: "14px",
+                    fontSize: "14px",
+                    paddingRight: "10px",
+                  }}
+                >
+                  https://rpc.{process.env.REACT_APP_BASE_URL}/{nodeId}{" "}
                 </div>{" "}
                 <button
                   className=""
@@ -624,7 +583,7 @@ function App() {
                     border: "none",
                     cursor: "pointer",
                     display: "flex",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                   clipboard-write
                   // onClick={() => {
@@ -633,7 +592,9 @@ function App() {
                   //   );
                   // }}
                   onClick={() => {
-                    copy(`https://rpc.${BASE_URL}/${nodeId}`);
+                    copy(
+                      `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`
+                    );
                   }}
                 >
                   {}
@@ -696,7 +657,6 @@ function App() {
             >
               https://t.me/Web3_dApp_Developers
             </a>
-            
           </div>
           <br />
           <div>Additional Notes:</div>
