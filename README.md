@@ -13,6 +13,14 @@ First, clone the repository:
 git clone https://github.com/BuildBearLabs/buildbear-remix-plugin
 cd buildbear-remix-plugin
 ```
+Rename Configuration File:
+Rename the provided .env.example file to .env.
+Add your REACT_APP_BASE_URL and REACT_APP_SANDBOX_TOKEN values.
+
+```
+REACT_APP_BASE_URL="YOUR_BASE_URL"
+REACT_APP_SANDBOX_TOKEN="YOUR_SANDBOX_TOKEN"
+```
 
 Install dependencies:
 
