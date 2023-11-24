@@ -132,7 +132,7 @@ function App() {
     } catch (_) {}
   }
 
-  //Checking Node status in every 1 sec
+  //Checking Sandbox status in every 1 sec
   const containerApi = useSWR(
     nodeId && !live ? "/user/container" : null,
     getNodeDetails,
