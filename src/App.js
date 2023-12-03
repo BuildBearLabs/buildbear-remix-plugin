@@ -287,7 +287,6 @@ function App() {
               </div>
               <button
                 className="btn btn-secondary"
-          
                 onClick={() => {
                   resetButton();
                 }}
@@ -362,13 +361,15 @@ function App() {
                     setLoader(true);
                   }}
                   className="btn btn-primary mb-4   "
-                  style={{width: "128px", display: "flex", justifyContent: "center"}}
+                  style={{
+                    width: "128px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
                 >
-                  {loader ? <div className="loader"></div> :  "Create Testnet"}
-                 
+                  {loader ? <div className="loader"></div> : "Create Testnet"}
                 </button>
               )}
-              
             </div>
 
             <div style={{ fontSize: "20px" }}>
@@ -383,10 +384,14 @@ function App() {
                       alignItems: "center",
                       gap: "10px",
                       marginBottom: "16px",
-                      fontSize: "11px",
+                      fontSize: "13px",
                     }}
                   >
-                    <div > <span className="text-uppercase">Sandbox ID :</span> {testnetName(nodeId)} </div>
+                    <div>
+                      {" "}
+                      <span className="">Sandbox ID :</span>{" "}
+                      {testnetName(nodeId)}{" "}
+                    </div>
                     <div
                       style={{
                         display: "flex",
@@ -396,10 +401,10 @@ function App() {
                         // alignItems: "center",
                         gap: "10px",
                         marginBottom: "6px",
-                        fontSize: "11px",
+                        fontSize: "13px",
                         paddingTop: "2px",
                       }}
-                      className="text-uppercase"
+                      // className="text-uppercase"
                     >
                       <div style={{ marginTop: "5px" }}> Sandbox Status : </div>
                       <div
@@ -477,93 +482,110 @@ function App() {
             {live && (
               <div
                 style={{
-                  display: "flex",
+                  display: "grid",
+                  // gridTemplateColumns: 'repeat(2, 1fr)',
                   // flexDirection: "row",
                   alignItems: "start",
                   gap: "10px",
-                  fontSize: "16px"
+                  fontSize: "16px",
                 }}
               >
-                {nodeId ? (
+                {!nodeId ? (
                   <>
-                    <button
-                      onClick={() => {
-                        setShowRpc(!showRpc);
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gap: "10px",
                       }}
-                      className="btn btn-info"
                     >
-                      View & Copy RPC
-                    </button>
+                      <button
+                        onClick={() => {
+                          setShowRpc(!showRpc);
+                        }}
+                        className="btn btn-info"
+                      >
+                        View & Copy RPC
+                      </button>
+                      <button
+                        className="btn btn-info"
+                        onClick={() => {
+                          connectMetaMask(nodeId, checkMetamaskLock);
+                        }}
+                      >
+                        Add to Metamask
+                      </button>
+                    </div>
 
-                    <a
-                      href={`https://explorer.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <button className="btn btn-info">View Explorer</button>
-                    </a>
-                    <a
-                      href={`https://faucet.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <button className="btn btn-info">Open Faucet</button>
-                    </a>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => {
-                        connectMetaMask(nodeId, checkMetamaskLock);
+                    {showRpc && (
+                      <div
+                        style={{
+                          // backgroundColor: "#35384c",
+                          width: "100%",
+                          alignItems: "center",
+                          display: "flex",
+                          padding: "8px 0px",
+                          justifyContent: "space-between",
+                          // marginTop: "10px",
+                          // marginBottom: "14px",
+                        }}
+                        // className=" mt-4"
+                      >
+                        <div
+                          style={{
+                            fontSize: "11px",
+                            height: "48px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                          className="form-control "
+                          typeof="text"
+                        >
+                          https://rpc.{process.env.REACT_APP_BASE_URL}/{nodeId}
+                        </div>{" "}
+                        <Button
+                          variant="link"
+                          size="md"
+                          className="m-2 p-2 float-right"
+                          onClick={() => {
+                            copy(
+                              `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`
+                            );
+                          }}
+                        >
+                          <i className="far fa-copy" />
+                        </Button>
+                      </div>
+                    )}
+
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gap: "10px",
                       }}
                     >
-                      Add to Metamask
-                    </button>
+                      <a
+                        href={`https://explorer.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-info text-decoration-none"
+                      >
+                        View Explorer
+                      </a>
+                      <a
+                        href={`https://faucet.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-info text-decoration-none"
+                      >
+                        Open Faucet
+                      </a>
+                    </div>
                   </>
                 ) : (
                   ""
                 )}
-              </div>
-            )}
-
-            {showRpc && (
-              <div
-                style={{
-                  // backgroundColor: "#35384c",
-                  width: "100%",
-                  alignItems: "center",
-                  display: "flex",
-                  padding: "8px 0px",
-                  justifyContent: "space-between",
-                  marginTop: "10px",
-                  marginBottom: "14px",
-                }}
-                className=" mt-4"
-              >
-                <div
-                  style={{
-                    fontSize: "11px",
-                    height: "48px",
-                    display: "flex",
-                    alignItems: "center"
-                  }}
-                  className="form-control "
-                  typeof="text"
-             
-                >
-                  https://rpc.{process.env.REACT_APP_BASE_URL}/{nodeId}
-                </div>{" "}
-             
-                <Button
-                  variant="link"
-                  size="md"
-                  className="m-2 p-2 float-right"
-                  onClick={() => {
-                    copy(
-                      `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`
-                    );
-                  }}
-                >
-                  <i className="far fa-copy" />
-                </Button>
               </div>
             )}
           </div>
