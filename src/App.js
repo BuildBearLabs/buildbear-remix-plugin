@@ -406,7 +406,7 @@ function App() {
                       }}
                       // className="text-uppercase"
                     >
-                      <div style={{ marginTop: "5px" }}> Sandbox Status : </div>
+                      <div > Sandbox Status : </div>
                       <div
                         style={{
                           // backgroundColor: "red",
@@ -490,7 +490,7 @@ function App() {
                   fontSize: "16px",
                 }}
               >
-                {!nodeId ? (
+                {nodeId ? (
                   <>
                     <div
                       style={{
