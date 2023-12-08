@@ -239,6 +239,14 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (showRpc) {
+      setTimeout(() => {
+        setShowRpc(false);
+      }, 7000);
+    }
+  }, [showRpc]);
+
+  useEffect(() => {
     document.addEventListener("visibilitychange", checkMetamaskLock);
     return () =>
       document.removeEventListener("visibilitychange", checkMetamaskLock);
@@ -347,10 +355,9 @@ function App() {
           <div style={{}}>
             <div
               style={{
-                display: "flex",
+                // display: "flex",
                 // justifyContent: "center",
                 alignItems: "center",
-                gap: "10px",
                 marginTop: "20px",
               }}
             >
@@ -373,6 +380,7 @@ function App() {
             </div>
 
             <div style={{ fontSize: "20px" }}>
+              {nodeId && <div className="  mt-0 border-bottom mb-4"></div>}
               {nodeId && (
                 <div>
                   <div
@@ -381,32 +389,37 @@ function App() {
                       flexDirection: "column",
                       justifyContent: "left",
                       // justifyContent: "left",
-                      alignItems: "center",
+                      // alignItems: "center",
                       gap: "10px",
                       marginBottom: "16px",
-                      fontSize: "13px",
+                      fontSize: "11px",
                     }}
                   >
-                    <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
                       {" "}
-                      <span className="">Sandbox ID :</span>{" "}
-                      {testnetName(nodeId)}{" "}
+                      <span className=" text-uppercase">Sandbox ID :</span>{" "}
+                      <span>{testnetName(nodeId)} </span>
                     </div>
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        // justifyContent: "left",
+                        justifyContent: "space-between",
                         // backgroundColor: "green",
                         // alignItems: "center",
                         gap: "10px",
                         marginBottom: "6px",
-                        fontSize: "13px",
+                        fontSize: "11px",
                         paddingTop: "2px",
                       }}
                       // className="text-uppercase"
                     >
-                      <div > Sandbox Status : </div>
+                      <div className="text-uppercase"> Sandbox Status : </div>
                       <div
                         style={{
                           // backgroundColor: "red",
@@ -416,10 +429,10 @@ function App() {
                           alignItems: "center",
                           float: "left",
                           gap: "10px",
-                          marginBottom: "6px",
+                          // marginBottom: "6px",
                           fontSize: "13px",
                           border: `1px solid ${live ? "green" : "red"}`,
-                          padding: "3px 5px",
+                          padding: "3px 4px",
                           borderRadius: "20px",
                         }}
                       >
@@ -438,7 +451,7 @@ function App() {
                           className="text-uppercase"
                         >
                           {live ? (
-                            "Live"
+                            <span className="pr-1">Live</span>
                           ) : (
                             <>
                               Starting{" "}
@@ -450,7 +463,7 @@ function App() {
                           )}
                         </div>
                       </div>
-                      {live ? (
+                      {/* {live ? (
                         ""
                       ) : (
                         <div
@@ -471,7 +484,7 @@ function App() {
                             Kindly wait as the sandbox is being created.{" "}
                           </span>
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
                   <div></div>
@@ -571,7 +584,7 @@ function App() {
                         rel="noreferrer"
                         className="btn btn-info text-decoration-none"
                       >
-                        View Explorer
+                        Open Explorer
                       </a>
                       <a
                         href={`https://faucet.${process.env.REACT_APP_BASE_URL}/${nodeId}`}
