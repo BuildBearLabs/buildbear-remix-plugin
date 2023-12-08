@@ -515,6 +515,9 @@ function App() {
                       <button
                         onClick={() => {
                           setShowRpc(!showRpc);
+                          copy(
+                            `https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`
+                          );
                         }}
                         className="btn btn-info"
                       >
