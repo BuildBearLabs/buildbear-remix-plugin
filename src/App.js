@@ -9,13 +9,15 @@ import Cookies from "universal-cookie";
 // import { BuildbearClient } from "./BuildbearClient";
 import { PluginClient } from "@remixproject/plugin";
 import { Button } from "react-bootstrap";
-import { RunTab } from "./runTab";
+import TestButton from "./testButton";
+// import { RunTab } from "./runTab";
 
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
 
 export const client = new PluginClient();
-createClient(client);
+const temp2 = createClient(client);
+
 // const myInstance = new RunTab();
 
 function App() {
@@ -31,23 +33,85 @@ function App() {
   const [theme, setTheme] = useState("dark");
   const [metamaskLock, setMetamaskLock] = useState(true);
 
-  useEffect(() => {
-    let cookies = new Cookies();
-    console.log("cookies", cookies);
-    let installed = cookies.get("plugin-installed");
-    console.log("installed", installed);
-    if (!installed) {
-      cookies.set("plugin-installed", "true");
-      // track("Remix: Plugin Installed", {}, userData);
-    }
-    client.on("theme", "themeChanged", (theme) => {
-      // console.log(JSON.stringify(theme))
-      setTheme(theme?.quality ?? "dark");
-    });
-  });
-  useEffect(() => {
-    // console.log("Theming", theme)
-  }, [theme]);
+  const environmentConfig = {
+    name: "Buildbear Rpc",
+    displayName: "Buildbear Rpc",
+    url: "https://rpc.buildbear.io/greasy-yoda-2bae1861",
+    chainId: 1337,
+    networkId: 1337,
+    options: {},
+    dataId: "",
+    fork: false,
+    isInjected: false,
+    isVM: false,
+    title: "",
+  };
+  // useEffect(() => {
+  //   let cookies = new Cookies();
+  //   console.log("cookies", cookies);
+  //   let installed = cookies.get("plugin-installed");
+  //   console.log("installed", installed);
+  //   if (!installed) {
+  //     cookies.set("plugin-installed", "true");
+  //     // track("Remix: Plugin Installed", {}, userData);
+  //   }
+  //   client.on("theme", "themeChanged", (theme) => {
+  //     // console.log(JSON.stringify(theme))
+  //     setTheme(theme?.quality ?? "dark");
+  //   });
+  //   client.onload(async () => {
+  //     // Your plugin logic goes here
+  //   });
+  // });
+  // useEffect(() => {
+  //   // console.log("Theming", theme)
+  // }, [theme]);
+  // function handleAddNetworkClick() {
+  //   // Get custom RPC configuration
+  //   const rpcConfig = {
+  //     name: 'bbrpc',
+  //     url: 'https://rpc.buildbear.io/greasy-yoda-2bae1861',
+  //     chainId: 12987,
+  //     networkId: 12987,
+  //   };
+
+  //   // Add custom RPC to Remix
+  //   client.call('blockchain', 'addProvider', rpcConfig)
+  //     .then(() => {
+  //       console.log('Network added successfully!');
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
+
+  async function testing (){
+        console.log("cl", client);
+    console.log("t2", temp2);
+    console.log(
+      " temp2.network.detectNetwork()",
+      await temp2.network.detectNetwork()
+    );
+    console.log(
+      " temp2.network.getNetworkProvider()",
+      await temp2.network.getNetworkProvider()
+    );
+    // id name url
+
+    console.log(
+      "await temp2.network.addNetwork(environmentConfig);",
+      await temp2.network.addNetwork({
+        id: "-",
+        name: "BBRPC",
+        url: "https://rpc.buildbear.io/greasy-yoda-2bae1861",
+      })
+    );
+  }
+
+
+  useEffect( () => {
+    testing()
+  }, []);
 
   //Sand box Reset Button
   function resetButton() {
@@ -278,6 +342,8 @@ function App() {
 
               <div>BuildBear Sandbox</div>
             </div>
+            <TestButton />
+            {/* <button onClick={()=> {()}}>Test</button> */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <div
                 style={{
@@ -305,7 +371,7 @@ function App() {
               </button>
             </div>
           </div>
-              <RunTab />
+          {/* <RunTab /> */}
           <div className="text-uppercase">
             <div
               style={{

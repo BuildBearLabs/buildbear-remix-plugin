@@ -27,6 +27,7 @@ const profile = {
     'resolveContractAndAddInstance'
   ]
 }
+
 export class RunTab extends ViewPlugin {
   constructor({blockchain, config, fileManager, editor, filePanel, compilersArtefacts, networkModule, fileProvider}) {
 
