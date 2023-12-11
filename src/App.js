@@ -9,12 +9,14 @@ import Cookies from "universal-cookie";
 // import { BuildbearClient } from "./BuildbearClient";
 import { PluginClient } from "@remixproject/plugin";
 import { Button } from "react-bootstrap";
+import { RunTab } from "./runTab";
 
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
 
 export const client = new PluginClient();
 createClient(client);
+// const myInstance = new RunTab();
 
 function App() {
   const [selectedChain, setSelectedChain] = useState("");
@@ -303,7 +305,7 @@ function App() {
               </button>
             </div>
           </div>
-
+              <RunTab />
           <div className="text-uppercase">
             <div
               style={{
