@@ -49,13 +49,21 @@ function App() {
 
   //Sand box Reset Button
   function resetButton() {
-    setSelectedChain("");
-    setSelectedOption();
+    setSelectedChain(chains[0].id);
+    if (selectedChain) {
+      const selectedChainObject = chains.find(
+        (chain) => chain.id === selectedChain
+      );
+      if (selectedChainObject) {
+        setSelectedOption(selectedChainObject.options[0]?.value);
+      }
+    }
     setNodeId();
     setBlockNumber();
     setLoader(false);
     setLive(false);
     setShowRpc(false);
+
   }
 
   const handleChainChange = (event) => {
