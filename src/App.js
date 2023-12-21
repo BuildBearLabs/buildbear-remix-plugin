@@ -4,11 +4,12 @@ import { createClient } from "@remixproject/plugin-webview";
 
 import axios from "axios";
 import useSWR from "swr";
-import { BuildbearLogoBlack, BuildbearLogoWhite } from "./svg";
 import Cookies from "universal-cookie";
 // import { BuildbearClient } from "./BuildbearClient";
 import { PluginClient } from "@remixproject/plugin";
 import { Button } from "react-bootstrap";
+import BuildbearLogoBlack1 from "./images/BuildbearLogoBlack.webp";
+import BuildbearLogoWhite1 from "./images/BuildbearLogoWhite.webp";
 
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
@@ -62,7 +63,6 @@ function App() {
     setLoader(false);
     setLive(false);
     setShowRpc(false);
-
   }
 
   const handleChainChange = (event) => {
@@ -279,7 +279,21 @@ function App() {
                 height: "60px",
               }}
             >
-              {theme === "light" ? BuildbearLogoBlack() : BuildbearLogoWhite()}
+              {theme === "light" ? (
+                <img
+                  src={BuildbearLogoBlack1}
+                  alt="Buildbear-Logo-Black"
+                  height="40"
+                  width="40"
+                />
+              ) : (
+                <img
+                  src={BuildbearLogoWhite1}
+                  alt="Buildbear-Logo-White"
+                  height="40"
+                  width="40"
+                />
+              )}
 
               <div>BuildBear Sandbox</div>
             </div>
