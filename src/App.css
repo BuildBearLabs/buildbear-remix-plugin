@@ -27,10 +27,6 @@
   overflow-x: hidden;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -89,7 +85,6 @@
 }
 
 
-
 .tooltip {
   position: relative;
   display: inline-block;
@@ -117,10 +112,6 @@
   visibility: visible;
 }
 
-.link-doc {
-  color: white;
-  text-decoration: underline;
-}
 
 
 .App-header  li {
@@ -128,32 +119,3 @@
 }
 
 
-.flex-item-left {
-  padding: 0px;
-  flex: 50%;
-  display: flex;
-  justify-content: space-evenly
-
-}
-
-.flex-item-right {
-  padding: 0px;
-  flex: 50%;
-  display: flex;
-  justify-content: space-evenly
-
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  font-size: 30px;
-  text-align: center;
-  
-}
-
-@media (max-width: 480px) {
-  .flex-container {
-    flex-direction: column;
-  }
-}
