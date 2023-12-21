@@ -12,7 +12,6 @@ import { Button } from "react-bootstrap";
 
 const { ethers } = require("ethers");
 const copy = require("copy-to-clipboard");
-
 export const client = new PluginClient();
 createClient(client);
 

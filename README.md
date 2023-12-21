@@ -1,5 +1,5 @@
 
-![buildbear](./src/BBLogo.svg)
+![buildbear](./src/BBLogo.webp)
 
 # BuildBear Plugin for Remix
 
