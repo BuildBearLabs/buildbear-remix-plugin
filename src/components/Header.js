@@ -1,30 +1,18 @@
 import React from "react";
 import BuildbearLogoBlack1 from "../images/BuildbearLogoBlack.webp";
 import BuildbearLogoWhite1 from "../images/BuildbearLogoWhite.webp";
-const Header = ({theme, resetButton}) => {
+import { Tooltip, Button, OverlayTrigger } from "react-bootstrap";
+const Header = ({ theme, resetButton }) => {
   return (
-    <div
-      className=" "
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 10,
-          height: "60px",
-        }}
-      >
+    <div className="d-flex justify-content-between align-items-center ">
+      <div className="d-flex align-items-center " style={{ height: "60px" }}>
         {theme === "light" ? (
           <img
             src={BuildbearLogoBlack1}
             alt="Buildbear-Logo-Black"
             height="40"
             width="40"
+            className="mr-2"
           />
         ) : (
           <img
@@ -32,36 +20,36 @@ const Header = ({theme, resetButton}) => {
             alt="Buildbear-Logo-White"
             height="40"
             width="40"
+            className="mr-2"
           />
         )}
 
         <div>BuildBear Sandbox</div>
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <div
-          style={{
-            border: "1px solid white ",
-            width: "20px",
-            height: "20px",
-            borderRadius: "100%",
-            fontSize: "14px",
-            fontWeight: "400",
-          }}
-          className="tooltip"
+      <div className="d-flex align-items-center  ">
+        <div></div>
+
+        <OverlayTrigger
+          placement="bottom"
+          overlay={
+            <Tooltip style={{ borderBottom: "0px solid #fff" }}>
+              To reset the configuration and establish a new sandbox.
+            </Tooltip>
+          }
         >
-          i
-          <span className="tooltiptext">
-            To reset the configuration and establish a new sandbox.
-          </span>
-        </div>
-        <button
+          <div className="d-flex justify-content-between align-items-center ">
+            <i className=" ml-2 fas fa-info-circle mr-2  " />
+          </div>
+        </OverlayTrigger>
+
+        <Button
           className="btn btn-secondary"
           onClick={() => {
             resetButton();
           }}
         >
           Reset
-        </button>
+        </Button>
       </div>
     </div>
   );

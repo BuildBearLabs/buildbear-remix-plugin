@@ -4,10 +4,7 @@ import { testnetName } from "./utils/helper";
 const copy = require("copy-to-clipboard");
 const { ethers } = require("ethers");
 
-
 const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
-
-
   async function connectMetaMask(nodeHash, checkMetamaskLock) {
     if (!window.ethereum) {
       console.log("Metamask not found. Please Install it.");
@@ -68,8 +65,6 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
     <div
       style={{
         display: "grid",
-        // gridTemplateColumns: 'repeat(2, 1fr)',
-        // flexDirection: "row",
         alignItems: "start",
         gap: "10px",
         fontSize: "16px",
@@ -106,16 +101,12 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
           {showRpc && (
             <div
               style={{
-                // backgroundColor: "#35384c",
                 width: "100%",
                 alignItems: "center",
                 display: "flex",
                 padding: "8px 0px",
                 justifyContent: "space-between",
-                // marginTop: "10px",
-                // marginBottom: "14px",
               }}
-              // className=" mt-4"
             >
               <div
                 style={{

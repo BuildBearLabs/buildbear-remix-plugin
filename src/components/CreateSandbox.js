@@ -1,5 +1,12 @@
 import React from "react";
 import { postCreateNode } from "../Api";
+import {
+  Form,
+  InputGroup,
+  Tooltip,
+  Button,
+  OverlayTrigger,
+} from "react-bootstrap";
 
 export const CreateSandbox = ({
   selectedChain,
@@ -22,75 +29,115 @@ export const CreateSandbox = ({
 
   return (
     <>
-      <div className="text-uppercase">
-        <div
-          style={{
-            marginBottom: "4px",
-            marginTop: "16px",
-          }}
-        >
-          <label>Select a blockchain to fork from :</label>
-          <select
-            className="form-control custom-select "
-            value={selectedChain}
-            onChange={handleChainChange}
-          >
-            {chains.map((chain) => (
-              <option key={chain.id} value={chain.id}>
-                {chain.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {selectedChain && (
-          <div
-            style={{
-              marginBottom: "4px",
-            }}
-          >
-            <label style={{}}>Choose between testnet/mainnet :</label>
-            <select
-              style={{}}
-              value={selectedOption}
-              onChange={handleOptionChange}
+      <div className="text-uppercase mb-3">
+        {/* <Container> */}
+        <Form.Group>
+          <Form.Label>BLOCKCHAIN</Form.Label>
+          <InputGroup.Append>
+            <Form.Control
+              as="select"
               className="form-control custom-select "
+              value={selectedChain}
+              onChange={handleChainChange}
             >
-              {chains
-                .find((chain) => chain.id === selectedChain)
-                ?.options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-            </select>
-          </div>
-        )}
+              {chains.map((chain) => (
+                <option key={chain.id} value={chain.id}>
+                  {chain.name}
+                </option>
+              ))}
+            </Form.Control>
+            <InputGroup.Append>
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip style={{ borderBottom: "0px solid #fff" }} id="">
+                    Select a blockchain to fork from
+                  </Tooltip>
+                }
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <i
+                    className=" ml-2 fas fa-info p-1  "
+                    style={{ fontSize: "0.8rem" }}
+                  />
+                </div>
+              </OverlayTrigger>
+            </InputGroup.Append>
+          </InputGroup.Append>
+        </Form.Group>
+        <Form.Group>
+          {selectedChain && (
+            <>
+              <Form.Label>TESTNET/MAINNET</Form.Label>
+              <InputGroup.Append>
+                <Form.Control
+                  as="select"
+                  className="form-control custom-select "
+                  value={selectedOption}
+                  onChange={handleOptionChange}
+                >
+                  {chains
+                    .find((chain) => chain.id === selectedChain)
+                    ?.options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                </Form.Control>
+                <InputGroup.Append>
+                  <OverlayTrigger
+                    placement="top"
+                    id="overlay-connect"
+                    overlay={
+                      <Tooltip id="" style={{ borderBottom: "0px solid #fff" }}>
+                        Choose between testnet/mainnet
+                      </Tooltip>
+                    }
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <i
+                        className=" ml-2 fas fa-info p-1  "
+                        style={{ fontSize: "0.8rem" }}
+                      />
+                    </div>
+                  </OverlayTrigger>
+                </InputGroup.Append>
+              </InputGroup.Append>
+            </>
+          )}
+        </Form.Group>
+        <Form.Group>
+          {selectedOption && !nodeId && (
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => {
+                createNode();
+                setLoader(true);
+              }}
+              className="btn btn-primary mt-4 d-flex justify-content-center w-32"
+              style={{
+                width: "128px",
+              }}
+            >
+              {loader ? <div className="loader"></div> : "Create Testnet"}
+            </Button>
+          )}
+        </Form.Group>
 
-        <>{selectedOption ? <></> : ""}</>
-      </div>
-      <div
-        style={{
-          alignItems: "center",
-          marginTop: "20px",
-        }}
-      >
-        {selectedOption && !nodeId && (
-          <button
-            onClick={() => {
-              createNode();
-              setLoader(true);
-            }}
-            className="btn btn-primary mb-4   "
-            style={{
-              width: "128px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            {loader ? <div className="loader"></div> : "Create Testnet"}
-          </button>
-        )}
+        {/* </Container> */}
       </div>
     </>
   );

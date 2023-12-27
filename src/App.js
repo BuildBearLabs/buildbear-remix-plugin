@@ -59,14 +59,22 @@ function App() {
     setLive(false);
     setShowRpc(false);
   }
+  function resetOnChangeOption() {
+    setNodeId();
+    setLoader(false);
+    setLive(false);
+    setShowRpc(false);
+  }
 
   const handleChainChange = (event) => {
     setSelectedChain(event.target.value);
     setSelectedOption("");
+    resetOnChangeOption();
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    resetOnChangeOption();
   };
 
   useEffect(() => {
@@ -153,8 +161,10 @@ function App() {
             nodeId={nodeId}
           />
           <div style={{}}>
+            {/* SandboxId and Status */}
             <SandboxDetails nodeId={nodeId} live={live} />
             {live && (
+              // Explore, Faucet, Rpc, Metamask
               <OptionsList
                 nodeId={nodeId}
                 setShowRpc={setShowRpc}
