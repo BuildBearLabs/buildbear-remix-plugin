@@ -24,7 +24,7 @@ const Header = ({ theme, resetButton }) => {
           />
         )}
 
-        <div>BuildBear Sandbox</div>
+        {/* <div>BuildBear Sandbox</div> */}
       </div>
       <div className="d-flex align-items-center  ">
         <div></div>
