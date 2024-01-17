@@ -27,7 +27,7 @@ const Header = ({ theme, resetButton }) => {
         {/* <div>BuildBear Sandbox</div> */}
       </div>
       <div className="d-flex align-items-center  ">
-        <div></div>
+        {/* <div></div> */}
 
         <OverlayTrigger
           placement="bottom"
@@ -38,18 +38,16 @@ const Header = ({ theme, resetButton }) => {
           }
         >
           <div className="d-flex justify-content-between align-items-center ">
-            <i className=" ml-2 fas fa-info-circle mr-2  " />
+            <Button
+              className="btn btn-secondary"
+              onClick={() => {
+                resetButton();
+              }}
+            >
+              Reset
+            </Button>
           </div>
         </OverlayTrigger>
-
-        <Button
-          className="btn btn-secondary"
-          onClick={() => {
-            resetButton();
-          }}
-        >
-          Reset
-        </Button>
       </div>
     </div>
   );
