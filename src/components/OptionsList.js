@@ -75,7 +75,7 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateColumns: "repeat(1, 1fr)",
               gap: "10px",
             }}
           >
@@ -84,20 +84,11 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
                 setShowRpc(!showRpc);
                 copy(`https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`);
               }}
-              className="btn btn-info"
+              className="btn btn-primary"
             >
               View & Copy RPC
             </button>
-            <button
-              className="btn btn-info"
-              onClick={() => {
-                connectMetaMask(nodeId, checkMetamaskLock);
-              }}
-            >
-              Add to Metamask
-            </button>
           </div>
-
           {showRpc && (
             <div
               style={{
@@ -134,6 +125,14 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               </Button>
             </div>
           )}
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              connectMetaMask(nodeId, checkMetamaskLock);
+            }}
+          >
+            Add to Metamask
+          </button>
 
           <div
             style={{
