@@ -1,6 +1,6 @@
 
-![buildbear](./src/BBLogo.svg)
-
+![buildbear](./src/images/BuildbearLogo.webp)
+ 
 # BuildBear Plugin for Remix
 
 The BuildBear plugin for Remix IDE. It support for deploy and interacting on BuildBear Sandbox (BuildBear Node).
@@ -33,6 +33,7 @@ Run the app:
 ```
 yarn start
 ``` 
+Branch : Master
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -52,7 +53,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
 ##  How to use BuildBear Remix Ide Plugin (Sand Box)
-1. Once your Sandbox is live, copy the RPC
+1. Once your Sandbox is live, copy the RPC. 
 2. Visit the 4th plugin "Deploy and Run Transactions"
 3. Drop down on the Environment
 4. Select "Custom External Http Provider"
