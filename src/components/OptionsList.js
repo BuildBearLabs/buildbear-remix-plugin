@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { testnetName } from "./utils/helper";
+import { getAnalytics } from "../Api";
 const copy = require("copy-to-clipboard");
 const { ethers } = require("ethers");
 
@@ -72,32 +73,36 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
     >
       {nodeId ? (
         <>
+    
+          <a
+              href={`https://${process.env.REACT_APP_TALLY_FORMS}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary text-decoration-none"
+              onClick={async () => {
+               
+              }}
+            >
+              Claim Sandbox
+            </a>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateColumns: "repeat(1, 1fr)",
               gap: "10px",
             }}
           >
             <button
-              onClick={() => {
+              onClick={async () => {
                 setShowRpc(!showRpc);
                 copy(`https://rpc.${process.env.REACT_APP_BASE_URL}/${nodeId}`);
+                await getAnalytics(nodeId, "copyRpc");
               }}
-              className="btn btn-info"
+              className="btn btn-primary"
             >
               View & Copy RPC
             </button>
-            <button
-              className="btn btn-info"
-              onClick={() => {
-                connectMetaMask(nodeId, checkMetamaskLock);
-              }}
-            >
-              Add to Metamask
-            </button>
           </div>
-
           {showRpc && (
             <div
               style={{
@@ -134,6 +139,15 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               </Button>
             </div>
           )}
+          <button
+            className="btn btn-secondary"
+            onClick={async () => {
+              connectMetaMask(nodeId, checkMetamaskLock);
+              await getAnalytics(nodeId, "addToMetamask");
+            }}
+          >
+            Add to Metamask
+          </button>
 
           <div
             style={{
@@ -147,6 +161,9 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               target="_blank"
               rel="noreferrer"
               className="btn btn-info text-decoration-none"
+              onClick={async () => {
+                await getAnalytics(nodeId, "openExplorer");
+              }}
             >
               Open Explorer
             </a>
@@ -155,6 +172,9 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               target="_blank"
               rel="noreferrer"
               className="btn btn-info text-decoration-none"
+              onClick={async () => {
+                await getAnalytics(nodeId, "openFaucet");
+              }}
             >
               Open Faucet
             </a>

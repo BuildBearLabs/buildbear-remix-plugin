@@ -64,3 +64,27 @@ export async function getNodeDetails(nodeId) {
     };
   }
 }
+
+export async function getAnalytics(nodeId, buttonName) {
+  const data = JSON.stringify({
+    projectName: "remix-plugin-ide",
+    button: buttonName,
+  });
+  const config = {
+    method: "post",
+    url: `https://backend.${process.env.REACT_APP_BASE_URL}/analytics/submit/${nodeId}`,
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_ANALYTICS}`,
+      "Content-Type": "application/json",
+    },
+    data,
+  };
+  try {
+    const res = await axios(config);
+    return res;
+  } catch (_) {
+    return {
+      data: {},
+    };
+  }
+}
