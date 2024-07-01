@@ -8,7 +8,7 @@ const { ethers } = require("ethers");
 const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
   async function connectMetaMask(nodeHash, checkMetamaskLock) {
     if (!window.ethereum) {
-      console.log("Metamask not found. Please Install it.");
+      // console.log("Metamask not found. Please Install it.");
       return;
     }
     const provider = new ethers.providers.JsonRpcProvider({
@@ -55,7 +55,6 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
         } else if (e.code === 4001) {
           console.log("User rejected the request");
         } else {
-          // errortoast("could not set network")
           console.log("Unable to add network");
         }
         //
@@ -79,16 +78,12 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               target="_blank"
               rel="noreferrer"
               className="btn btn-secondary text-decoration-none"
-              onClick={async () => {
-               
-              }}
             >
               Claim Sandbox
             </a>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(1, 1fr)",
               gap: "10px",
             }}
           >

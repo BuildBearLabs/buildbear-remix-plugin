@@ -22,7 +22,6 @@ export const CreateSandbox = ({
   //Post container request
   async function createNode() {
     const res = await postCreateNode(selectedOption);
-    console.log("post", res);
     setNodeId(res?.data?.sandboxId);
     setLoader(false);
     await getAnalytics(res?.data?.sandboxId, "createSandbox");
