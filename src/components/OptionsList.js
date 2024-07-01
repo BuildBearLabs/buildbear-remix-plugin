@@ -8,7 +8,6 @@ const { ethers } = require("ethers");
 const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
   async function connectMetaMask(nodeHash, checkMetamaskLock) {
     if (!window.ethereum) {
-      // console.log("Metamask not found. Please Install it.");
       return;
     }
     const provider = new ethers.providers.JsonRpcProvider({
@@ -43,19 +42,14 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
       })
       .then((data) => {
         if (data === null) {
-          console.log("Successfully added.");
           checkMetamaskLock();
         } else {
-          console.log("Unable to add.");
         }
       })
       .catch((e) => {
         if (e.code === 4902) {
-          console.log("network is not available, add it");
         } else if (e.code === 4001) {
-          console.log("User rejected the request");
         } else {
-          console.log("Unable to add network");
         }
         //
       });

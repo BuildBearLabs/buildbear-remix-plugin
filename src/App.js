@@ -27,20 +27,16 @@ function App() {
 
   useEffect(() => {
     let cookies = new Cookies();
-    console.log("cookies", cookies);
     let installed = cookies.get("plugin-installed");
-    console.log("installed", installed);
     if (!installed) {
       cookies.set("plugin-installed", "true");
       // track("Remix: Plugin Installed", {}, userData);
     }
     client.on("theme", "themeChanged", (theme) => {
-      // console.log(JSON.stringify(theme))
       setTheme(theme?.quality ?? "dark");
     });
   });
   useEffect(() => {
-    // console.log("Theming", theme)
   }, [theme]);
 
   //Sand box Reset Button
