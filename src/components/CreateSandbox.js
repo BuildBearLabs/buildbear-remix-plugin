@@ -1,5 +1,5 @@
 import React from "react";
-import { postCreateNode } from "../Api";
+import { getAnalytics, postCreateNode } from "../Api";
 import {
   Form,
   InputGroup,
@@ -22,9 +22,9 @@ export const CreateSandbox = ({
   //Post container request
   async function createNode() {
     const res = await postCreateNode(selectedOption);
-    console.log("post", res);
     setNodeId(res?.data?.sandboxId);
     setLoader(false);
+    await getAnalytics(res?.data?.sandboxId, "createSandbox");
   }
 
   return (
@@ -129,10 +129,10 @@ export const CreateSandbox = ({
               }}
               className="btn btn-primary mt-4 d-flex justify-content-center w-32"
               style={{
-                width: "128px",
+                width: "138px",
               }}
             >
-              {loader ? <div className="loader"></div> : "Create Testnet"}
+              {loader ? <div className="loader"></div> : "Create Sandbox"}
             </Button>
           )}
         </Form.Group>
