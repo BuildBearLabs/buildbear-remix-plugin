@@ -72,6 +72,9 @@ const OptionsList = ({ nodeId, setShowRpc, showRpc, checkMetamaskLock }) => {
               target="_blank"
               rel="noreferrer"
               className="btn btn-secondary text-decoration-none"
+              onClick={async()=>{
+                await getAnalytics(nodeId, "claimSandbox");
+              }}
             >
               Claim Sandbox
             </a>
