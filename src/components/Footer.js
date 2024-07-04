@@ -31,7 +31,7 @@ const Footer = () => {
         </li>
       </ol>
       <div>
-        If you have any issues, you can reach out to us on team@buildbear.io or{" "}
+        If you have any issues, you can reach out to us at team@buildbear.io or{" "}
         <a
           href="https://t.me/Web3_dApp_Developers"
           target="_noref"
@@ -43,8 +43,7 @@ const Footer = () => {
       <div>Additional Notes:</div>
       <ol style={{ paddingLeft: "12px" }}>
         <li>
-          If you want to reset your sandbox, you can use the "Reset" button on
-          the top-right corner of this plugin.
+        If you want to reset your sandbox, you can use the "Reset" button in the top-right corner of this plugin.
         </li>
         <li>
           If you want to claim this sandbox and access it through BuildBear
