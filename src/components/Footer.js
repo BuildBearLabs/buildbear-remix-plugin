@@ -34,8 +34,7 @@ const Footer = () => {
         If you have any issues, you can reach out to us on team@buildbear.io or{" "}
         <a
           href="https://t.me/Web3_dApp_Developers"
-          target="  _noref "
-          // className="link-doc"
+          target="_noref"
         >
           https://t.me/Web3_dApp_Developers
         </a>
