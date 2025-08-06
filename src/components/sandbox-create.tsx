@@ -88,13 +88,15 @@ export const SandboxCreate = ({
           value={state?.network?.id ?? ''}
         >
           <SelectTrigger className="w-full dark:text-white">
-            <SelectValue placeholder="Select a Network" />
-            {isLoading && (
-              <Loader2
-                className="animate-spin !size-4 text-white"
-                strokeWidth={1.5}
-              />
-            )}
+            <div className="flex items-center gap-1 w-full">
+              {isLoading && (
+                <Loader2
+                  className="animate-spin !size-4 dark:text-white text-gray-900"
+                  strokeWidth={1.5}
+                />
+              )}
+              <SelectValue placeholder="Select a Network" />
+            </div>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -116,8 +118,16 @@ export const SandboxCreate = ({
             onValueChange={(value) => setState({ ...state, chainId: value })}
             value={state.chainId}
           >
-            <SelectTrigger className="w-full dark:text-white">
-              <SelectValue placeholder="Select a Chain" />
+            <SelectTrigger className="w-full flex items-center gap-1 dark:text-white">
+              <div className="flex items-center gap-1">
+                {isLoading && (
+                  <Loader2
+                    className="animate-spin !size-4 dark:text-white text-gray-900"
+                    strokeWidth={1.5}
+                  />
+                )}
+                <SelectValue placeholder="Select a Chain" />
+              </div>
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
