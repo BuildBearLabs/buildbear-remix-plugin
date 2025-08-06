@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+<img src="https://r2.buildbear.io/brand-v2/logo/svg/Logo-Full-Green-Mark-On-Dark-Text.svg" alt="BuildBear Labs Logo" height="44" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# BuildBear Remix Plugin
 
-Currently, two official plugins are available:
+A Remix IDE plugin that allows developers to easily create and manage blockchain sandboxes for testing and development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Multi-Chain Support**: Create sandboxes for Ethereum, Arbitrum, Avalanche, Base, Polygon, and more
+- **One-Click Sandbox Creation**: Quickly spin up blockchain environments
+- **Integrated Tools**: Access to RPC endpoints, block explorers, and faucets
+- **MetaMask Integration**: Seamless wallet connection
+- **Persistent State**: Your sandbox settings are saved locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Node.js 20 or higher
+- pnpm package manager
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/BuildBearLabs/buildbear-remix-plugin.git
+cd buildbear-remix-plugin
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+pnpm install
 ```
+
+3. Start the development server:
+```bash
+pnpm dev
+```
+
+4. Build for production:
+```bash
+pnpm build
+```
+
+## Usage
+
+1. **Select Network**: Choose your desired blockchain network from the dropdown
+2. **Create Sandbox**: Click "Create Sandbox" to spin up a new environment
+3. **Access Tools**: Use the provided RPC URL, explorer, and faucet links
+4. **Connect Wallet**: Connect your MetaMask wallet to interact with the sandbox
+
+## Development
+
+This plugin is built with:
+
+- **React 19** - UI framework
+- **Vite** - Build tool
+- **TypeScript** - Type safety
+- **TailwindCSS** - Styling
+- **Biome** - Linting and formatting
+
+### Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm format` - Format code with Biome
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run formatting: `pnpm format`
+5. Submit a pull request
+
+## Support
+
+If you have any issues, you can reach out to us on team@buildbear.io or https://t.me/Web3_dApp_Developers
