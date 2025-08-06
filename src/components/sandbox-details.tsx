@@ -260,7 +260,7 @@ export const SandboxDetails = ({ state, setState }: SandboxDetailsProps) => {
 
       <div className="flex flex-col gap-1.5">
         <a
-                      href={import.meta.env.VITE_TALLY_FORM ?? ''}
+          href={import.meta.env.VITE_TALLY_FORM ?? ''}
           target="_blank"
           rel="noreferrer noopener"
           onMouseDown={async () => {

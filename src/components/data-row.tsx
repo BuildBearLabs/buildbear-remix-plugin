@@ -1,4 +1,3 @@
-import { Copy } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { CopyToClipboard, Label } from '~/components/ui'
 

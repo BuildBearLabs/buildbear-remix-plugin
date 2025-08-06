@@ -1,6 +1,7 @@
 import { PluginClient } from '@remixproject/plugin'
 import { createClient } from '@remixproject/plugin-webview'
 
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import Cookies from 'universal-cookie'
 import {
@@ -11,7 +12,6 @@ import {
 } from '~/components'
 import type { Network, State } from '~/lib/types'
 import { fetchNetworks } from './lib/actions'
-import { useQuery } from '@tanstack/react-query'
 
 const client = new PluginClient()
 createClient(client)

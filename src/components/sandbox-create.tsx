@@ -66,7 +66,9 @@ export const SandboxCreate = ({
 
             if (!selectedNetwork) {
               // Find the network by id instead
-              const foundNetwork = networks?.find((network: Network) => network.id === value)
+              const foundNetwork = networks?.find(
+                (network: Network) => network.id === value,
+              )
               if (foundNetwork) {
                 setState({
                   ...state,

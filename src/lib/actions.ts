@@ -25,14 +25,17 @@ export const fetchNetworks = async () => {
  * specified blockchain network.
  */
 export const createSandbox = async ({ chainId }: { chainId: string }) => {
-  const res = await fetch(`${import.meta.env.VITE_API_BASE}/buildbear-sandbox`, {
-    method: 'POST',
-    body: JSON.stringify({ chainId }),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_BEARER_TOKEN}`,
+  const res = await fetch(
+    `${import.meta.env.VITE_API_BASE}/buildbear-sandbox`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ chainId }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_BEARER_TOKEN}`,
+      },
     },
-  })
+  )
 
   if (!res.ok) {
     throw new Error('Failed to create sandbox')

@@ -1,18 +1,4 @@
-import { MetaMaskSDK } from '@metamask/sdk'
 import type { Sandbox } from '~/lib/types'
-
-// Initialize MetaMask SDK
-const MMSDK = new MetaMaskSDK({
-  dappMetadata: {
-    name: 'BuildBear',
-    url:
-      typeof window !== 'undefined'
-        ? window.location.origin
-        : 'https://buildbear.io',
-  },
-  // Don't install provider automatically in Remix plugin context
-  shouldShimWeb3: false,
-})
 
 export interface AddNetworkParams {
   chainId: number
