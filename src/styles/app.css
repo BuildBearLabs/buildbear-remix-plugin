@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark light;
+    @apply dark:text-white text-gray-800 !border-gray-200 dark:!border-gray-700;
+  }
+
+  * {
+    @apply font-sans antialiased;
+  }
+
+  .using-mouse * {
+    outline: none !important;
+  }
+
+  .toaster {
+    color: black;
+  }
+}
