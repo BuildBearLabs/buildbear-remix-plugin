@@ -25,6 +25,7 @@ dist-ssr
 
 .DS_Store
 .env
+.env.*
 .vercel
 .output
 /build/
