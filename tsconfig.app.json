@@ -21,6 +21,5 @@
       "~/*": ["./src/*"]
     },
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src"]
+  }
 }
