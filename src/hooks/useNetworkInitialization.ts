@@ -70,4 +70,4 @@ export const useNetworkInitialization = ({
   return {
     hasInitializedNetwork: hasInitializedNetwork.current,
   }
-} 
+}

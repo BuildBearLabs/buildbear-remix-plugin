@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import type { Network } from '~/lib/types'
 import { fetchNetworks } from '~/lib/actions'
+import type { Network } from '~/lib/types'
 
 export const useNetworks = () => {
   const {
@@ -19,4 +19,4 @@ export const useNetworks = () => {
     isLoading: isNetworksPending || isNetworksRefetching,
     error,
   }
-} 
+}
